@@ -15,9 +15,9 @@ and open the template in the editor.
         include_once './DAO/Operaciones.php';
         include_once './DAO/conexion_bd.php';
         if (Operaciones::compruebaUsuarios() == null) {
-            header('Location:http://localhost:8888/Proyecto_cajas_dct/vistas/registrarUsuario_vista.php');
+            header('Location:/Proyecto_cajas_dct/vistas/registrarUsuario_vista.php');
         } else {
-            header('Location:http://localhost:8888/Proyecto_cajas_dct/vistas/inicio_sesion_vista.php');
+            header('Location:/Proyecto_cajas_dct/vistas/inicio_sesion_vista.php');
         }
         ?>
 
