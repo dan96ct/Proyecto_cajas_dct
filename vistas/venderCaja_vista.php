@@ -18,7 +18,7 @@ and open the template in the editor.
     </head>
     <body>
 
-        <form action="http://localhost:8888/Proyecto_cajas_dct/controlador/controladorVender_caja.php" method="get" class="formulario">
+        <form action="../controlador/controladorVender_caja.php" method="get" class="formulario">
             <table border="1" class="tabla">
                 <tbody>
                     <tr><th>Venta de caja</th></tr>

@@ -24,7 +24,7 @@ and open the template in the editor.
     </head>
     <body onload="cargaValores();">
 
-        <form action="http://localhost:8888/Proyecto_cajas_dct/controlador/controladorDevolver_caja.php" method="get" class="formulario">
+        <form action="../controlador/controladorDevolver_caja.php" method="get" class="formulario">
             <table border="1" class="tabla" style="width: 250px;">
                 <tbody>
                     <tr><th>Codigo de caja</th></tr>

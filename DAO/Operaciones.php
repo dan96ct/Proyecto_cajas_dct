@@ -27,7 +27,7 @@ class Operaciones {
         $passCifrada = md5('sorbete_de_limon' . $pass);
         //$passCifrada = password_hash($pass, PASSWORD_BCRYPT);
         $ordenSQL = "INSERT INTO `usuarios` (`usuario`, `contraseña`) VALUES ('" . $usu . "', '" . $passCifrada . "');";
-        $consulta = mysqli_query($conexion, $ordenSQL);
+        $consulta = $conexion->query($ordenSQL);
         if ($consulta) {
             mysqli_commit($conexion);
         } else {
@@ -80,7 +80,7 @@ class Operaciones {
 
             $ordenSQL = "INSERT INTO `estanteria` (`material`, `nLejas`, `pasillo`, `numero`, `lejasOcupadas`, `codigo`) 
             VALUES ('" . $material . "', '" . $numero_lejas . "', '" . $pasillo . "', '" . $n_pasillo . "', '" . 0 . "', '" . $codigo . "');";
-            $resultado = mysqli_query($conexion, $ordenSQL);
+            $resultado = $conexion->query($ordenSQL);
             if ($resultado) {
                 mysqli_commit($conexion);
             } else {
@@ -163,22 +163,22 @@ class Operaciones {
             mysqli_autocommit($conexion, false);
             $ordenSQL = "INSERT INTO `caja` (`color`, `altura`, `anchura`, `profundidad`, `material`, `contenido`,`codigo`) 
             VALUES ('" . $color . "', '" . $altura . "', '" . $anchura . "', '" . $profundidad . "', '" . $material . "', '" . $contenido . "','" . $codigo . "');";
-            $resultado = mysqli_query($conexion, $ordenSQL);
+            $resultado = $conexion->query($ordenSQL);
 
             $ordenSQL2 = "SELECT `id` FROM `caja` WHERE `codigo`='" . $codigo . "'";
-            $resultado2 = mysqli_query($conexion, $ordenSQL2);
+            $resultado2 = $conexion->query($ordenSQL2);
 
             $ordenSQL3 = "SELECT `id` FROM `estanteria` WHERE `codigo`='" . $estanteria . "'";
-            $resultado3 = mysqli_query($conexion, $ordenSQL3);
+            $resultado3 = $conexion->query($ordenSQL3);
 
             $idEstanteria = $resultado3->fetch_array();
             $idCaja = $resultado2->fetch_array();
 
             $ordenSQL4 = "INSERT INTO `ocupacion` (`idCaja`, `idEstanteria`, `lejaOcupada`) VALUES ('" . $idCaja['id'] . "', '" . $idEstanteria['id'] . "', '" . $lejaEstanteria . "')";
-            $resultado4 = mysqli_query($conexion, $ordenSQL4);
+            $resultado4 = $conexion->query($ordenSQL4);
 
             $ordenSQL5 = "UPDATE `estanteria` SET `lejasOcupadas`=`lejasOcupadas`+1 WHERE `id`='" . $idEstanteria['id'] . "';";
-            $resultado5 = mysqli_query($conexion, $ordenSQL5);
+            $resultado5 = $conexion->query($ordenSQL5);
 
             if ($resultado && $resultado2 && $resultado3 && $resultado4 && $resultado5) {
                 mysqli_commit($conexion);
@@ -214,7 +214,20 @@ class Operaciones {
 
     public function listarCajas() {
         global $conexion;
-          
+        $ordenSQL = "SELECT caja.color'color',caja.altura'altura',caja.anchura'anchura',caja.profundidad'profundidad',caja.material'material',caja.contenido'contenido',caja.codigo'codigo',estanteria.codigo'codigoEstanteria',ocupacion.lejaOcupada'lejaOcupada' FROM caja, ocupacion,estanteria WHERE caja.id = ocupacion.id AND ocupacion.id = estanteria.id";
+        $consulta = $conexion->query($ordenSQL);
+        $arrayCajas = array();
+        if($consulta){
+            $fila = $consulta->fetch_array();
+            while($fila){
+                $caja = new Caja($fila['color'], $fila['altura'], $fila['anchura'], $fila['profundidad'], $fila['material'], $fila['contenido'], $fila['codigo']);
+                $caja->setEstanteria($fila['codigoEstanteria']);
+                $caja->setLejaOcupada($fila['lejaOcupada']);
+                array_push($arrayCajas, $caja);
+                $fila = $consulta->fetch_array();
+            }
+        }
+        return $arrayCajas;
     }
 
     public function getCodigoCajas() {
@@ -352,7 +365,7 @@ class Operaciones {
     public function borrarEstanteria($codigo) {
         $orderSQL = "DELETE FROM `bd_alumno_dct`.`estanteria` WHERE `codigo`='" . $codigo . "'";
         global $conexion;
-        $consulta = mysqli_query($conexion, $orderSQL);
+        $consulta = $conexion->query($orderSQL);
         if ($consulta) {
             mysqli_commit($conexion);
         } else {

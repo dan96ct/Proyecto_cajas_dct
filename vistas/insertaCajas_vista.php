@@ -9,8 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>       
         <link href="../vistas/css/css.css" rel="stylesheet" type="text/css"/>
-        <script src="../scriptAJAX.js" type="text/javascript"></script>
-
+        <script src="javascript/JavaScript.js" type="text/javascript"></script>
         <script>
             function cargaValores() {
                 var valor = document.getElementById("lista_estanteria").value;
@@ -51,7 +50,8 @@ and open the template in the editor.
                     </tr>
                     <tr><td colspan="7">Datos estanteria</td></tr>
                     <tr><td colspan="7">
-                            Esanteria:<select style="width: 30%;" id="lista_estanteria" name="lista_estanteria" onchange="muestraDestinos(this.value)">
+                            Esanteria:
+                            <select style="width: 30%;" id="lista_estanteria" name="lista_estanteria" onchange="muestraDestinos(this.value)">
 
                                 <?php
                                 $estanterias = Operaciones::listarEstanteriasAJAX();
@@ -63,7 +63,8 @@ and open the template in the editor.
                                 }
                                 ?>
                             </select>
-                            Leja:<select style="width: 30%;" id="lista_posicion" name="lista_posicion">
+                            Leja:
+                            <select style="width: 30%;" id="lista_posicion" name="lista_posicion">
 
                             </select>
                     </tr>

@@ -10,9 +10,9 @@ include_once '../Errores/Error_caja_devolucion_excepcion.php';
 
 try{
 Operaciones::devolverCaja($codigo,$estanteria,$leja);
-header('Location:/Proyecto_cajas_dct/vistas/devolverCaja_vista.php');
+header('Location:../vistas/devolverCaja_vista.php');
 } catch(Error_caja_devolucion_excepcion $exc){
-    header('Location:/Proyecto_cajas_dct/vistas/vista_error.php?error='.$exc);
+    header('Location:../vistas/vista_error.php?error='.$exc);
 }
 ?>
 
