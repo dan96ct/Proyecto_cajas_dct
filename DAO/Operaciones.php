@@ -212,7 +212,7 @@ class Operaciones {
         return $arrayEstanterias;
     }
 
-    public function listarCajas(){
+    public function listarCajas() {
         global $conexion;
         $ordenSQL = "SELECT caja.color'color',caja.altura'altura',caja.anchura'anchura',caja.profundidad'profundidad',caja.material'material',caja.contenido'contenido',caja.codigo'codigo',estanteria.codigo'codigoEstanteria',ocupacion.lejaOcupada'lejaOcupada' FROM caja, ocupacion,estanteria WHERE caja.id = ocupacion.id AND ocupacion.id = estanteria.id";
         $consulta = $conexion->query($ordenSQL);
@@ -261,7 +261,7 @@ class Operaciones {
             }
         } else {
             echo "La consulta no ha producido resultados" . "<br>";
-        } 
+        }
         return $arrayCodigoCajas;
     }
 
@@ -286,45 +286,49 @@ class Operaciones {
     }
 
     public function devolverCaja($codigo, $estanteria, $leja) {
-        global $conexion;
-        mysqli_autocommit($conexion, false);
-        /* PRIMERA SENTENCIA */
-        $ordenSQL = "SELECT * FROM cajasVendidas WHERE codigo='" . $codigo . "';";
-        $consulta = $conexion->query($ordenSQL);
-        $fila = $consulta->fetch_array();
-        $caja = new Caja($fila['color'], $fila['altura'], $fila['anchura'], $fila['profundidad'], $fila['material'], $fila['contenido'], $fila['codigo']);
-        $caja->setLejaOcupada($leja);
-        $caja->setEstanteria($estanteria);
-        /* SEGUNDA SENTENCIA */
-        $ordenSQL2 = "INSERT INTO `caja` (`color`, `altura`, `anchura`, `profundidad`, `material`, `contenido`,`codigo`) 
+        if (Operaciones::compruebaCaja($codigo) === true) {
+            global $conexion;
+            mysqli_autocommit($conexion, false);
+            /* PRIMERA SENTENCIA */
+            $ordenSQL = "SELECT * FROM cajasVendidas WHERE codigo='" . $codigo . "';";
+            $consulta = $conexion->query($ordenSQL);
+            $fila = $consulta->fetch_array();
+            $caja = new Caja($fila['color'], $fila['altura'], $fila['anchura'], $fila['profundidad'], $fila['material'], $fila['contenido'], $fila['codigo']);
+            $caja->setLejaOcupada($leja);
+            $caja->setEstanteria($estanteria);
+            /* SEGUNDA SENTENCIA */
+            $ordenSQL2 = "INSERT INTO `caja` (`color`, `altura`, `anchura`, `profundidad`, `material`, `contenido`,`codigo`) 
             VALUES ('" . $caja->getColor() . "', '" . $caja->getAltura() . "', '" . $caja->getAnchura() . "', '" . $caja->getProfundidad() . "', '" . $caja->getMaterial() . "', '" . $caja->getContenido() . "','" . $caja->getCodigo() . "');";
-        $consulta2 = $conexion->query($ordenSQL2);
+            $consulta2 = $conexion->query($ordenSQL2);
 //        /* TERCERA SENTENCIA */
-        $ordenSQL3 = "UPDATE `bd_alumno_dct`.`estanteria` SET `lejasOcupadas`=`lejasOcupadas`+1 WHERE `codigo`='" . $caja->getEstanteria() . "';";
-        $consulta3 = $conexion->query($ordenSQL3);
+            $ordenSQL3 = "UPDATE `bd_alumno_dct`.`estanteria` SET `lejasOcupadas`=`lejasOcupadas`+1 WHERE `codigo`='" . $caja->getEstanteria() . "';";
+            $consulta3 = $conexion->query($ordenSQL3);
 //        /* CUARTA SENTENCIA */
-        $ordenSQL4 = "SELECT * FROM `estanteria` WHERE `codigo` ='" . $caja->getEstanteria() . "';";
-        $consulta4 = $conexion->query($ordenSQL4);
-        $fila2 = $consulta4->fetch_array();
-        $caja->setEstanteria($fila2['id']);
-        /* QUINTA SENTENCIA */
-        $ordenSQL5 = "SELECT * FROM `caja` WHERE `codigo` ='" . $caja->getCodigo() . "';";
-        $consulta5 = $conexion->query($ordenSQL5);
-        $idCaja = $consulta5->fetch_array();
+            $ordenSQL4 = "SELECT * FROM `estanteria` WHERE `codigo` ='" . $caja->getEstanteria() . "';";
+            $consulta4 = $conexion->query($ordenSQL4);
+            $fila2 = $consulta4->fetch_array();
+            $caja->setEstanteria($fila2['id']);
+            /* QUINTA SENTENCIA */
+            $ordenSQL5 = "SELECT * FROM `caja` WHERE `codigo` ='" . $caja->getCodigo() . "';";
+            $consulta5 = $conexion->query($ordenSQL5);
+            $idCaja = $consulta5->fetch_array();
 //        /* SEXTA SENTENCIA */
-        $ordenSQL6 = "INSERT INTO `ocupacion` (`idCaja`, `idEstanteria`, `lejaOcupada`) VALUES ('" . $idCaja['id'] . "', '" . $caja->getEstanteria() . "', '" . $caja->getLejaOcupada() . "')";
-        $consulta6 = $conexion->query($ordenSQL6);
-        /* SEPTIMA SENTENCIA */
-        $ordenSQL7 = "DELETE FROM `cajasVendidas` WHERE `codigo`='" . $caja->getCodigo() . "';";
-        $consulta7 = $conexion->query($ordenSQL7);
+            $ordenSQL6 = "INSERT INTO `ocupacion` (`idCaja`, `idEstanteria`, `lejaOcupada`) VALUES ('" . $idCaja['id'] . "', '" . $caja->getEstanteria() . "', '" . $caja->getLejaOcupada() . "')";
+            $consulta6 = $conexion->query($ordenSQL6);
+            /* SEPTIMA SENTENCIA */
+            $ordenSQL7 = "DELETE FROM `cajasVendidas` WHERE `codigo`='" . $caja->getCodigo() . "';";
+            $consulta7 = $conexion->query($ordenSQL7);
 
-        if ($consulta && $consulta2 && $consulta3 && $consulta4 && $consulta5 && $consulta7) {
-            mysqli_commit($conexion);
-            $conexion->close();
+            if ($consulta && $consulta2 && $consulta3 && $consulta4 && $consulta5 && $consulta7) {
+                mysqli_commit($conexion);
+                $conexion->close();
+            } else {
+                mysqli_rollback($conexion);
+                $conexion->close();
+                throw new Error_caja_devolucion_excepcion();
+            }
         } else {
-            mysqli_rollback($conexion);
-            $conexion->close();
-            throw new Error_caja_devolucion_excepcion();
+            throw new Error_caja_excepcion("El codigo introducido ya existe");
         }
     }
 
