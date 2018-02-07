@@ -16,7 +16,7 @@ and open the template in the editor.
         include_once '../modelo/Inventario.php';
         include_once '../modelo/Caja.php';
         session_start();
-        $arrayInventario = $_SESSION['sesion'];
+        $arrayInventario = $_SESSION['inventario'];
         global $arrayEstanterias;
         session_destroy();
         ?>

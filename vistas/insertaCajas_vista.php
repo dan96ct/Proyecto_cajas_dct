@@ -50,7 +50,7 @@ and open the template in the editor.
                             <select style="width: 30%;" id="lista_estanteria" name="lista_estanteria" onchange="comprobarLejas(this.value);">
                                 <?php
                                 session_start();
-                                $estanterias = $_SESSION['sesion'];
+                                $estanterias = $_SESSION['estanteriasInsertC'];
                                 global $estanterias;
                                 session_destroy();
                                 for ($i = 0; $i < count($estanterias); $i++) {

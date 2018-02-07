@@ -17,7 +17,7 @@ and open the template in the editor.
         include_once '../menu.php';
         include_once '../modelo/Estanteria.php';
         session_start();
-        $arrayEstanterias = $_SESSION['sesion'];
+        $arrayEstanterias = $_SESSION['estanterias'];
         global $arrayEstanterias;
         session_destroy();
         ?>
