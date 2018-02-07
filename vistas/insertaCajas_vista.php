@@ -53,7 +53,6 @@ and open the template in the editor.
                                 $estanterias = $_SESSION['sesion'];
                                 global $estanterias;
                                 session_destroy();
-
                                 for ($i = 0; $i < count($estanterias); $i++) {
                                     if ($estanterias[$i]->getLejasOcupadas() < $estanterias[$i]->getNLejas()) {
                                         ?><option><?php echo $estanterias[$i]->getCodigo(); ?></option><?php
@@ -63,10 +62,10 @@ and open the template in the editor.
                             </select>
                             Leja:
                             <select style="width: 30%;" id="lista_posicion" name="lista_posicion">
-                                <script>comprobarLejas('<?php echo  $estanterias[0]->getCodigo();?>');</script>
+                                <script>comprobarLejas('<?php echo $estanterias[0]->getCodigo(); ?>');</script>
                             </select>
                     </tr>
-                    
+
                     <tr><td colspan="7"><button type="submit" name="buton">Aceptar</button></td></tr>
                 </tbody>
             </table>

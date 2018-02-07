@@ -212,14 +212,14 @@ class Operaciones {
         return $arrayEstanterias;
     }
 
-    public function listarCajas() {
+    public function listarCajas(){
         global $conexion;
         $ordenSQL = "SELECT caja.color'color',caja.altura'altura',caja.anchura'anchura',caja.profundidad'profundidad',caja.material'material',caja.contenido'contenido',caja.codigo'codigo',estanteria.codigo'codigoEstanteria',ocupacion.lejaOcupada'lejaOcupada' FROM caja, ocupacion,estanteria WHERE caja.id = ocupacion.id AND ocupacion.id = estanteria.id";
         $consulta = $conexion->query($ordenSQL);
         $arrayCajas = array();
-        if($consulta){
+        if ($consulta) {
             $fila = $consulta->fetch_array();
-            while($fila){
+            while ($fila) {
                 $caja = new Caja($fila['color'], $fila['altura'], $fila['anchura'], $fila['profundidad'], $fila['material'], $fila['contenido'], $fila['codigo']);
                 $caja->setEstanteria($fila['codigoEstanteria']);
                 $caja->setLejaOcupada($fila['lejaOcupada']);
@@ -261,7 +261,7 @@ class Operaciones {
             }
         } else {
             echo "La consulta no ha producido resultados" . "<br>";
-        }
+        } 
         return $arrayCodigoCajas;
     }
 

@@ -25,7 +25,7 @@ hacer backup
                     <ul>
                         <li><a href="/Proyecto_cajas_dct/controlador/controladorGetEstanterias_insertarCaja.php">Insertar caja</a></li>
                         <li><a href="/Proyecto_cajas_dct/vistas/venderCaja_vista.php">Vender caja</a></li>
-                        <li><a href="/Proyecto_cajas_dct/controlador/controladorGetCodigoCajasVendidas.php">Devolucion caja</a></li>
+                        <li><a href="/Proyecto_cajas_dct/controlador/controladorGetEstanterias_devolverCaja.php">Devolucion caja</a></li>
 
 
                         <li><a href="/Proyecto_cajas_dct/controlador/controladorListar_cajas.php">Listar cajas</a></li>

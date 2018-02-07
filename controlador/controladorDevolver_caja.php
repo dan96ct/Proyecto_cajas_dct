@@ -10,7 +10,7 @@ include_once '../Errores/Error_caja_devolucion_excepcion.php';
 
 try{
 Operaciones::devolverCaja($codigo,$estanteria,$leja);
-header('Location:../vistas/devolverCaja_vista.php');
+header('Location:../controlador/controladorGetEstanterias_devolverCaja.php');
 } catch(Error_caja_devolucion_excepcion $exc){
     header('Location:../vistas/vista_error.php?error='.$exc);
 }

@@ -39,6 +39,33 @@ function getCodigoCajas() {
         }
     }
 }
+function cargarAJAX(estanteria) {
+    objetoAjax2 = AJAXCrearObjeto(); //crea el objeto
+    objetoAjax2.open('GET', "/Proyecto_cajas_dct/controlador/controladorGetCajasVendidas_AJAX.php");
+    objetoAjax2.send();
+    objetoAjax2.onreadystatechange = function () {
+        if (objetoAjax2.readyState === 4 && objetoAjax2.status === 200) {
+            var datos = objetoAjax2.responseText;
+            var objeto = JSON.parse(datos);
+            if (objeto.length === 0) {
+                document.getElementById("listaCajasVendidas").disabled = true;
+                var placeHolder = document.createAttribute("placeholder");
+                placeHolder.value = "Funcion no disponible";
+                document.getElementById("listaCajasVendidas").setAttributeNode(placeHolder);
+                $('#botonDevolverCaja').attr("disabled", true);
+
+            } else {
+                var datalist = document.getElementById("cajasVendidas");
+                for (var i = 0; i < objeto.length; i++) {
+                    var nodo = document.createElement("option");
+                    nodo.value = objeto[i];
+                    datalist.appendChild(nodo);
+                }
+            }
+            comprobarLejas(estanteria);
+        }
+    }
+}
 function AJAXCrearObjeto() {
     if (window.XMLHttpRequest) {
 // navegadores que siguen los estándares

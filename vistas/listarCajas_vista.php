@@ -16,10 +16,6 @@ and open the template in the editor.
         <?php
         include_once '../menu.php';
         include_once '../modelo/Caja.php';
-        session_start();
-        $arrayCajas = $_SESSION['sesion'];
-        global $arrayCajas;
-        session_destroy();
         ?>
 
         <table border="1" class="tabla">
@@ -40,8 +36,14 @@ and open the template in the editor.
                 </tr>
             </thead>
             <tbody>
-                <?php for ($i = 0; $i < count($arrayCajas); $i++) { ?><tr>
-                    <td><div style="width: 50px; height: 20px; background: <?php echo $arrayCajas[$i]->getColor(); ?>;"></div></td>
+                <?php
+                session_start();
+                $arrayCajas = $_SESSION['cajas'];
+                global $arrayCajas;
+                session_destroy();
+                for ($i = 0; $i < count($arrayCajas); $i++) {
+                    ?><tr>
+                        <td><div style="width: 50px; height: 20px; background: <?php echo $arrayCajas[$i]->getColor(); ?>;"></div></td>
                         <td><?php echo $arrayCajas[$i]->getAltura(); ?></td>
                         <td><?php echo $arrayCajas[$i]->getAnchura(); ?></td>
                         <td><?php echo $arrayCajas[$i]->getProfundidad(); ?></td>
