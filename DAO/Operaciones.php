@@ -109,7 +109,7 @@ class Operaciones {
                 $fila = $consulta->fetch_array();
             }
         }
-        if (validar == true) {
+        if ($validar == true) {
             $ordenSQL2 = "SELECT * FROM `cajasVendidas`;";
             $consulta2 = $conexion->query($ordenSQL2);
             if ($consulta2) {
@@ -117,6 +117,39 @@ class Operaciones {
                 while ($fila2) {
                     if ($fila2['codigo'] === $codigo) {
                         $validar = false;
+                        break;
+                    }
+                    $fila2 = $consulta2->fetch_array();
+                }
+            }
+        }
+        return $validar;
+    }
+
+    public function compruebaCajaDevolucion($codigo) {
+        global $conexion;
+
+        $ordenSQL = "SELECT * FROM `cajas`;";
+        $consulta = $conexion->query($ordenSQL);
+        $validar = false;
+        if ($consulta) {
+            $fila = $consulta->fetch_array();
+            while ($fila) {
+                if ($fila['codigo'] === $codigo) {
+                    $validar = true;
+                    break;
+                }
+                $fila = $consulta->fetch_array();
+            }
+        }
+        if ($validar == false) {
+            $ordenSQL2 = "SELECT * FROM `cajasVendidas`;";
+            $consulta2 = $conexion->query($ordenSQL2);
+            if ($consulta2) {
+                $fila2 = $consulta2->fetch_array();
+                while ($fila2) {
+                    if ($fila2['codigo'] === $codigo) {
+                        $validar = true;
                         break;
                     }
                     $fila2 = $consulta2->fetch_array();
@@ -286,7 +319,7 @@ class Operaciones {
     }
 
     public function devolverCaja($codigo, $estanteria, $leja) {
-        if (Operaciones::compruebaCaja($codigo) === true) {
+        if (Operaciones::compruebaCajaDevolucion($codigo) === true) {
             global $conexion;
             mysqli_autocommit($conexion, false);
             /* PRIMERA SENTENCIA */
@@ -328,7 +361,7 @@ class Operaciones {
                 throw new Error_caja_devolucion_excepcion();
             }
         } else {
-            throw new Error_caja_excepcion("El codigo introducido ya existe");
+            throw new Error_caja_devolucion_excepcion("El codigo introducido ya existe");
         }
     }
 

@@ -25,7 +25,7 @@ and open the template in the editor.
                 <tbody>
                     <tr><th>Codigo de caja</th></tr>
                     <tr><td>
-                            <input id = "listaCajasVendidas" list = "cajasVendidas" name = "introCodigo" required>
+                            <input id = "listaCajasVendidas" list = "cajasVendidas" name="introCodigo" required>
                             <datalist id = "cajasVendidas">
                             </datalist></td>
                 <script>
@@ -54,6 +54,7 @@ and open the template in the editor.
                     </td>
                 <tr><td>
                         <button id="botonDevolverCaja" type="submit">Devolver</button>
+                        <script>desactivarInputs();</script>
                         <script>cargarAJAX('<?php echo $estanterias[0]->getCodigo(); ?>');</script>
 
 

@@ -39,6 +39,20 @@ function getCodigoCajas() {
         }
     }
 }
+function desactivarInputs() {
+    document.getElementById("listaCajasVendidas").disabled = true;
+    var placeHolder = document.createAttribute("placeholder");
+    placeHolder.value = "Funcion no disponible";
+    document.getElementById("listaCajasVendidas").setAttributeNode(placeHolder);
+    $('#botonDevolverCaja').attr("disabled", true);
+}
+function activarImputs() {
+    document.getElementById("listaCajasVendidas").disabled = false;
+    var placeHolder = document.createAttribute("placeholder");
+    placeHolder.value = "";
+    document.getElementById("listaCajasVendidas").setAttributeNode(placeHolder);
+    $('#botonDevolverCaja').attr("disabled", false);
+}
 function cargarAJAX(estanteria) {
     objetoAjax2 = AJAXCrearObjeto(); //crea el objeto
     objetoAjax2.open('GET', "/Proyecto_cajas_dct/controlador/controladorGetCajasVendidas_AJAX.php");
@@ -48,13 +62,10 @@ function cargarAJAX(estanteria) {
             var datos = objetoAjax2.responseText;
             var objeto = JSON.parse(datos);
             if (objeto.length === 0) {
-                document.getElementById("listaCajasVendidas").disabled = true;
-                var placeHolder = document.createAttribute("placeholder");
-                placeHolder.value = "Funcion no disponible";
-                document.getElementById("listaCajasVendidas").setAttributeNode(placeHolder);
-                $('#botonDevolverCaja').attr("disabled", true);
+                desactivarInputs();
 
             } else {
+                activarImputs();
                 var datalist = document.getElementById("cajasVendidas");
                 for (var i = 0; i < objeto.length; i++) {
                     var nodo = document.createElement("option");
