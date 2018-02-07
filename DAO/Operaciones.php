@@ -214,7 +214,7 @@ class Operaciones {
 
     public function listarCajas() {
         global $conexion;
-        $ordenSQL = "SELECT caja.color'color',caja.altura'altura',caja.anchura'anchura',caja.profundidad'profundidad',caja.material'material',caja.contenido'contenido',caja.codigo'codigo',estanteria.codigo'codigoEstanteria',ocupacion.lejaOcupada'lejaOcupada' FROM caja, ocupacion,estanteria WHERE caja.id = ocupacion.id AND ocupacion.id = estanteria.id";
+        $ordenSQL = "SELECT caja.color'color',caja.altura'altura',caja.anchura'anchura',caja.profundidad'profundidad',caja.material'material',caja.contenido'contenido',caja.codigo'codigo',estanteria.codigo'codigoEstanteria',ocupacion.lejaOcupada'lejaOcupada' FROM caja, ocupacion,estanteria WHERE caja.id = ocupacion.idCaja AND ocupacion.idEstanteria = estanteria.id";
         $consulta = $conexion->query($ordenSQL);
         $arrayCajas = array();
         if ($consulta) {

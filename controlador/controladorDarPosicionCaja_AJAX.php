@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '../DAO/conexion_bd.php';
 ?>
 
@@ -52,6 +51,5 @@ if ($consulta) {
     debug_to_console("Ha ido algo mal");
 }
 $conexion->close();
-session_destroy();
 ?>
 

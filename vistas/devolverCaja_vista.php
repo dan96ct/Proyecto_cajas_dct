@@ -25,7 +25,7 @@ and open the template in the editor.
                 <tbody>
                     <tr><th>Codigo de caja</th></tr>
                     <tr><td>
-                            <input id = "listaCajasVendidas" list = "cajasVendidas" name = "introCodigo">
+                            <input id = "listaCajasVendidas" list = "cajasVendidas" name = "introCodigo" required>
                             <datalist id = "cajasVendidas">
                             </datalist></td>
                 <script>
