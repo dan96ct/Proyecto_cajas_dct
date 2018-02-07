@@ -9,15 +9,11 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>       
         <link href="../vistas/css/css.css" rel="stylesheet" type="text/css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="javascript/JavaScript.js" type="text/javascript"></script>
-        <script>
-            function cargaValores() {
-                var valor = document.getElementById("lista_estanteria").value;
-                muestraDestinos(valor);
-            }
-        </script>
+
     </head>
-    <body onload="cargaValores();">
+    <body>
         <?php
         include_once '../menu.php';
         include_once '../DAO/Operaciones.php';
@@ -51,10 +47,12 @@ and open the template in the editor.
                     <tr><td colspan="7">Datos estanteria</td></tr>
                     <tr><td colspan="7">
                             Esanteria:
-                            <select style="width: 30%;" id="lista_estanteria" name="lista_estanteria" onchange="muestraDestinos(this.value)">
-
+                            <select style="width: 30%;" id="lista_estanteria" name="lista_estanteria" onchange="comprobarLejas(this.value);">
                                 <?php
-                                $estanterias = Operaciones::listarEstanteriasAJAX();
+                                session_start();
+                                $estanterias = $_SESSION['sesion'];
+                                global $estanterias;
+                                session_destroy();
 
                                 for ($i = 0; $i < count($estanterias); $i++) {
                                     if ($estanterias[$i]->getLejasOcupadas() < $estanterias[$i]->getNLejas()) {
@@ -65,10 +63,10 @@ and open the template in the editor.
                             </select>
                             Leja:
                             <select style="width: 30%;" id="lista_posicion" name="lista_posicion">
-
+                                <script>comprobarLejas('<?php echo  $estanterias[0]->getCodigo();?>');</script>
                             </select>
                     </tr>
-
+                    
                     <tr><td colspan="7"><button type="submit" name="buton">Aceptar</button></td></tr>
                 </tbody>
             </table>

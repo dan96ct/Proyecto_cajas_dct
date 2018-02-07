@@ -9,9 +9,10 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>
         <link href="../vistas/css/css.css" rel="stylesheet" type="text/css"/>
+        <script src="javascript/JavaScript.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <?php
         include_once '../menu.php';
-        include_once '../DAO/Operaciones.php';
         ?>
 
 
@@ -25,30 +26,14 @@ and open the template in the editor.
                     <tr><td>
                             <input id="cajasLista" list="cajas" name="introCodigo" required="true">
                             <datalist id="cajas">
+                                <script>getCodigoCajas();</script>
                             </datalist>
-                            <button type="submit">Vender</button>
+                            <button id="botonVenderCaja" type="submit">Vender</button>
+
                         </td>
                     </tr>
                 </tbody>
             </table>
         </form>
     </body>
-    <script>
-        var arrayCodigos = <?php echo json_encode(Operaciones::getCodigoCajas()); ?>;
-        if (arrayCodigos.length === 0) {
-            document.getElementById("cajasLista").disabled = true;
-            var placeHolder = document.createAttribute("placeholder");
-            placeHolder.value = "Funcion no disponible";
-            document.getElementById("cajasLista").setAttributeNode(placeHolder);
-
-        } else {
-            var datalist = document.getElementById("cajas");
-            for (var i = 0; i < arrayCodigos.length; i++) {
-                var nodo = document.createElement("option");
-                nodo.value = arrayCodigos[i];
-                datalist.appendChild(nodo);
-            }
-        }
-
-    </script>
 </html>

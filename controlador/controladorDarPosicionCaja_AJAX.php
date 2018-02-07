@@ -5,7 +5,7 @@ include_once '../DAO/conexion_bd.php';
 
 <?php
 //OBTENEMOS LA VARIABLE Origen
-$Origen = $_REQUEST['origen'];
+$Origen = $_REQUEST['estanteria'];
 
 //array_dif
 
@@ -47,10 +47,7 @@ if ($consulta) {
             array_push($arrayFinal, $arraLejasTotal[$i]);
         }
     }
-
-    for ($i = 0; $i < count($arrayFinal); $i++) {
-        ?><option><?php echo $arrayFinal[$i]; ?></option><?php
-    }
+    echo json_encode($arrayFinal);
 } else {
     debug_to_console("Ha ido algo mal");
 }

@@ -22,7 +22,7 @@ $objCaja->setLejaOcupada($lejaOcupada);
 $objCaja->setEstanteria($estanteria);
 try {
     Operaciones::addCaja($objCaja);
-    header('Location:../vistas/insertaCajas_vista.php');
+    header('Location:controladorGetEstanterias_insertarCaja.php');
 } catch (Error_caja_excepcion $exc) {
     header('Location:../vistas/vista_error.php?error=' . $exc);
 }
