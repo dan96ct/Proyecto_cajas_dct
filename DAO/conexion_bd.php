@@ -2,14 +2,6 @@
 
 # Establecer la conexión con el servidor
 
-function debug_to_console($data) {
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
-}
-
 $conexion = new mysqli('127.0.0.1', 'root', 'root');
 
 

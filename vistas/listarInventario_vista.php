@@ -18,7 +18,6 @@ and open the template in the editor.
         session_start();
         $arrayInventario = $_SESSION['inventario'];
         global $arrayEstanterias;
-        session_destroy();
         ?>
         <table border="1" class="tabla">
             <?php
@@ -45,10 +44,10 @@ and open the template in the editor.
                         <tr><th colspan="8">Cajas de estanteria</th></tr>
                         <tr><th>Color</th><th>Altura</th><th>Anchura</th><th>Profundidad</th><th>Material</th><th>Contenido</th>
                             <th>Codigo</th><th>Leja ocupada</th></tr>
-                    <?php
-                    $arrayCajas = $arrayInventario[$i]->getCajas();
-                    for ($j = 0; $j < count($arrayCajas); $j++) {
-                    ?>
+                        <?php
+                        $arrayCajas = $arrayInventario[$i]->getCajas();
+                        for ($j = 0; $j < count($arrayCajas); $j++) {
+                            ?>
                             <tr style="background-color: #cccccc;">
                                 <td><div style="width: 50px; height: 20px; background: <?php echo $arrayCajas[$j]->getColor(); ?>;"></div></td>
                                 <td><?php echo $arrayCajas[$j]->getAltura(); ?></td>
@@ -60,11 +59,13 @@ and open the template in the editor.
                                 <td><?php echo $arrayCajas[$j]->getLejaOcupada(); ?></td>
                             </tr>
 
-                <?php }
-                } ?>
+                        <?php
+                        }
+                    }
+                    ?>
                     <tr><td colspan="7" style="width: 20px; height: 20px; border: 0px;"></td></tr>
                 </tbody>
-                <?php } ?>
+<?php } ?>
         </table>
 
 

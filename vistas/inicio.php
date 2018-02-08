@@ -8,12 +8,12 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
-        <link href="vistas/css/css_index.css" rel="stylesheet" type="text/css"/>
+        <link href="css/css_index.css" rel="stylesheet" type="text/css"/>
 
     </head>
     <body>
         <?php
-        include_once 'menu.php';
+        include_once '../menu.php';
         ?>
         <canvas id="nokey" width="1920" height="1280">
         </canvas>

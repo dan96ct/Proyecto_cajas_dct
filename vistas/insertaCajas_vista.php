@@ -35,7 +35,7 @@ and open the template in the editor.
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="color" name="introColor" value="" required /></td>
+                        <td><input type="color" name="introColor" value="" /></td>
                         <td><input type="number" name="introAltura" value="" required min="0"/></td>
                         <td><input type="number" name="introAnchura" value="" required min="0"/></td>
                         <td><input type="number" name="introProfundidad" value="" required min="0"/></td>
@@ -52,7 +52,6 @@ and open the template in the editor.
                                 session_start();
                                 $estanterias = $_SESSION['estanteriasInsertC'];
                                 global $estanterias;
-                                session_destroy();
                                 for ($i = 0; $i < count($estanterias); $i++) {
                                     if ($estanterias[$i]->getLejasOcupadas() < $estanterias[$i]->getNLejas()) {
                                         ?><option><?php echo $estanterias[$i]->getCodigo(); ?></option><?php

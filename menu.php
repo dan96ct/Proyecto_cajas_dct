@@ -19,7 +19,7 @@ hacer backup
     <body>
         <div id="container">
             <ul id="menu">
-                <li><a href="/Proyecto_cajas_dct/inicio.php">Home</a>
+                <li><a href="/Proyecto_cajas_dct/vistas/inicio.php">Home</a>
                 </li>
                 <li><a href="#">Caja</a>
                     <ul>
@@ -42,9 +42,5 @@ hacer backup
             </ul>
         </div>
         <div id="particle-canvas"></div>
-
-        <?php
-        // put your code here
-        ?>
     </body>
 </html>
