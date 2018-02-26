@@ -27,15 +27,15 @@ DROP TABLE IF EXISTS `caja`;
 CREATE TABLE `caja` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `color` varchar(45) NOT NULL,
-  `altura` int(11) NOT NULL,
-  `anchura` int(11) NOT NULL,
-  `profundidad` int(11) NOT NULL,
+  `altura` double NOT NULL,
+  `anchura` double NOT NULL,
+  `profundidad` double NOT NULL,
   `material` varchar(45) NOT NULL,
   `contenido` varchar(45) NOT NULL,
   `codigo` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `codigo_UNIQUE` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `caja` (
 
 LOCK TABLES `caja` WRITE;
 /*!40000 ALTER TABLE `caja` DISABLE KEYS */;
-INSERT INTO `caja` VALUES (56,'#000000',20,20,20,'Madera','tornillos','20');
+INSERT INTO `caja` VALUES (64,'#000000',50.4,50.4,80.1,'Madera','Tornillos','80P'),(65,'#000000',51.5,50.5,50.85,'Metal','Tornillos','P70'),(66,'#000000',51.5,50.5,50.85,'Madera','Tuercas','N20');
 /*!40000 ALTER TABLE `caja` ENABLE KEYS */;
 UNLOCK TABLES;
 ALTER DATABASE `bd_alumno_dct` CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci ;
@@ -82,15 +82,15 @@ DROP TABLE IF EXISTS `cajasvendidas`;
 CREATE TABLE `cajasvendidas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `color` varchar(45) NOT NULL,
-  `altura` int(11) NOT NULL,
-  `anchura` int(11) NOT NULL,
-  `profundidad` int(11) NOT NULL,
+  `altura` double NOT NULL,
+  `anchura` double NOT NULL,
+  `profundidad` double NOT NULL,
   `material` varchar(45) NOT NULL,
   `contenido` varchar(45) NOT NULL,
   `codigo` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `codigo_UNIQUE` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ CREATE TABLE `estanteria` (
   UNIQUE KEY `UNIQUE` (`numero`,`pasillo`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `codigo_UNIQUE` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `estanteria` (
 
 LOCK TABLES `estanteria` WRITE;
 /*!40000 ALTER TABLE `estanteria` DISABLE KEYS */;
-INSERT INTO `estanteria` VALUES (13,'madera','4','A','2',1,'a1');
+INSERT INTO `estanteria` VALUES (19,'Madera','4','A','1',1,'A50'),(20,'Aluminio','5','A','2',2,'A40');
 /*!40000 ALTER TABLE `estanteria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +151,7 @@ CREATE TABLE `ocupacion` (
   KEY `id_idx1` (`idEstanteria`),
   CONSTRAINT `id` FOREIGN KEY (`idCaja`) REFERENCES `caja` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `id_estanteria` FOREIGN KEY (`idEstanteria`) REFERENCES `estanteria` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `ocupacion` (
 
 LOCK TABLES `ocupacion` WRITE;
 /*!40000 ALTER TABLE `ocupacion` DISABLE KEYS */;
-INSERT INTO `ocupacion` VALUES (56,56,13,1);
+INSERT INTO `ocupacion` VALUES (64,64,19,1),(65,65,20,1),(66,66,20,2);
 /*!40000 ALTER TABLE `ocupacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(45) NOT NULL,
   `contraseña` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-08  0:03:19
+-- Dump completed on 2018-02-26 19:34:35

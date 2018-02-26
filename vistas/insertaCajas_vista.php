@@ -36,9 +36,9 @@ and open the template in the editor.
                 <tbody>
                     <tr>
                         <td><input type="color" name="introColor" value="" /></td>
-                        <td><input type="number" name="introAltura" value="" required min="0"/></td>
-                        <td><input type="number" name="introAnchura" value="" required min="0"/></td>
-                        <td><input type="number" name="introProfundidad" value="" required min="0"/></td>
+                        <td><input type="number" step="0.01" name="introAltura" value="" required min="0"/></td>
+                        <td><input type="number" step="0.01" name="introAnchura" value="" required min="0"/></td>
+                        <td><input type="number" step="0.01" name="introProfundidad" value="" required min="0"/></td>
                         <td><input type="text" name="introMaterial" value="" required/></td>
                         <td><input type="text" name="introContenido" value="" required/></td>
                         <td><input type="text" name="introCodigo" value="" required/></td>
