@@ -37,7 +37,7 @@ and open the template in the editor.
             </thead>
             <tbody>
 <?php
-                session_start();
+                @session_start();
                 $arrayCajas = $_SESSION['cajas'];
                 global $arrayCajas;
                 for ($i = 0; $i < count($arrayCajas); $i++) {

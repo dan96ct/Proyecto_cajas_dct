@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Proyecto_cajas_dct/DAO/Operaciones.php</file>
-            <file>file:/C:/xampp/htdocs/Proyecto_cajas_dct/vistas/javascript/JavaScript.js</file>
-            <file>file:/C:/xampp/htdocs/Proyecto_cajas_dct/controlador/controladorGetCajasVendidas_AJAX.php</file>
-            <file>file:/C:/xampp/htdocs/Proyecto_cajas_dct/vistas/devolverCaja_vista.php</file>
+            <file>file:/C:/xampp/htdocs/Proyecto_cajas_dct/index.php</file>
+            <file>file:/C:/xampp/htdocs/Proyecto_cajas_dct/controlador/controladorListar_inventario.php</file>
+            <file>file:/C:/xampp/htdocs/Proyecto_cajas_dct/vistas/listarInventario_vista.php</file>
         </group>
     </open-files>
 </project-private>

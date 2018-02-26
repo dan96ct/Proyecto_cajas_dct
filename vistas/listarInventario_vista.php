@@ -15,8 +15,12 @@ and open the template in the editor.
         include_once '../menu.php';
         include_once '../modelo/Inventario.php';
         include_once '../modelo/Caja.php';
-        session_start();
+        @session_start();
+        if (isset($_SESSION['inventario'])) {
         $arrayInventario = $_SESSION['inventario'];
+        } else {
+
+        }
         global $arrayEstanterias;
         ?>
         <table border="1" class="tabla">
@@ -40,7 +44,7 @@ and open the template in the editor.
                         <td><?php echo $arrayInventario[$i]->getPasillo(); ?></td>
                         <td><?php echo $arrayInventario[$i]->getNumero(); ?></td>
                         <td colspan="3"><?php echo $arrayInventario[$i]->getLejasOcupadas(); ?></td></tr>
-                    <?php if ($arrayInventario[$i]->getLejasOcupadas() > 0) { ?>
+    <?php if ($arrayInventario[$i]->getLejasOcupadas() > 0) { ?>
                         <tr><th colspan="8">Cajas de estanteria</th></tr>
                         <tr><th>Color</th><th>Altura</th><th>Anchura</th><th>Profundidad</th><th>Material</th><th>Contenido</th>
                             <th>Codigo</th><th>Leja ocupada</th></tr>
@@ -59,7 +63,7 @@ and open the template in the editor.
                                 <td><?php echo $arrayCajas[$j]->getLejaOcupada(); ?></td>
                             </tr>
 
-                        <?php
+                            <?php
                         }
                     }
                     ?>

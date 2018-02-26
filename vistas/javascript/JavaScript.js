@@ -1,6 +1,6 @@
 function comprobarLejas(estanteria) {
     objetoAjax = AJAXCrearObjeto(); //crea el objeto
-    objetoAjax.open('GET', "/Proyecto_cajas_dct/controlador/controladorDarPosicionCaja_AJAX.php?estanteria=" + estanteria);
+    objetoAjax.open('GET', "/Proyecto_cajas_dct/controlador/DarPosicionCaja_AJAX.php?estanteria=" + estanteria);
     objetoAjax.send();
     objetoAjax.onreadystatechange = function () {
         if (objetoAjax.readyState === 4 && objetoAjax.status === 200) {

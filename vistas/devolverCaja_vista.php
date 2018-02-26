@@ -37,7 +37,7 @@ and open the template in the editor.
                         Esanteria:
                         <select style="width: 30%;" id="lista_estanteria" name="lista_estanteria" onchange="comprobarLejas(this.value);">
                             <?php
-                            session_start();
+                            @session_start();
                             $estanterias = $_SESSION['estanteriasDevolCaja'];
                             global $estanterias;
                             session_destroy();

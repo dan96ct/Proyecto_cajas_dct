@@ -12,3 +12,4 @@ if (!$conexion->connect_errno) {
 } else {
     echo "<h2> No ha sido posible crear la conexión con el servidor</h2><br>";
 } 
+?>

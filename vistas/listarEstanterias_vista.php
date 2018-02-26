@@ -10,7 +10,7 @@
         <?php
         include_once '../menu.php';
         include_once '../modelo/Estanteria.php';
-        session_start();
+        @session_start();
         $arrayEstanterias = $_SESSION['estanterias'];
         $arrayEstanterias;
         ?>

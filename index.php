@@ -1,5 +1,4 @@
-<?php
-    header('Location:./controlador/controladorComprobarRegistro.php');
+<?php header('Location:./controlador/controladorComprobarRegistro.php');
 
 
 
